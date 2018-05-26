@@ -167,7 +167,7 @@ Add your react app to github - [https://help.github.com/articles/adding-an-exist
 
 * Create a new github repository
 
-![Create a new github repository](https://github.com/jchappypig/react-workshop/raw/master/src/assets/new-repo.png)
+![Create a new github repository](https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/new-repo.png)
 
 * Back to the terminal
 ```
