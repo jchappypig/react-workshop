@@ -81,14 +81,99 @@ const Button = styled.button`
 `;
 ```
 
-Replace Button with customized `Button`
+Replace button with customized `Button`
 ```
 <Button>Save</Button>
 ```
 
+**Use color constants**
+
+In the editor, `App.js`
+```
+const buttonColor = '#2BB98C';
+const buttonHoverColor = '#21906d'
+```
+
+Replace hard-coded color with colors variables
+```
+const Button = styled.button`
+    color: #fff;
+    background-color: ${buttonColor};
+    border-color: ${buttonColor};
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.3rem;
+
+    &:hover {
+      background-color: ${buttonHoverColor};
+      border-color: ${buttonHoverColor};
+    }
+`;
+```
+
+#### Try it out: Play around with the styles and make the button special to you - May be hot pink? round? 😆
+
+5mins
+<br><br><br><br>
+
+**Extract Button component**
+
+The skeleton of a component
+```
+import React, { Component } from 'react';
+
+export default class extends Component {
+  render() {
+  }
+}
+```
+
+Firstly, create a new file called `Button.js` under a new folder named `components`
 
 
 
+**Learn about version control - [git](http://rogerdudler.github.io/git-guide/)**
+
+In the terminal, firstly initialize your app with git control
+```
+git init
+```
+
+After initialization, you should be able to see the status of the changes
+```
+git status
+```
+
+Then add all your files to be under git control
+```
+git add -A
+```
+
+Commit the changes
+```
+git commit -m 'added button component'
+```
+
+
+Add your react app to github - [https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
+
+* Create a new github repository
+
+![Create a new github repository](https://github.com/jchappypig/react-workshop/raw/master/src/assets/new-repo.png)
+
+* Back to the terminal
+```
+git remote add origin git@github.com:<yourGithubUserName>/react-workshop.git
+git push -u origin master
+```
 
 
 
