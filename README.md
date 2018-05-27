@@ -20,11 +20,11 @@
 
 In the terminal
 ```
-npx create-react-app react-is-awesome
+npx create-react-app react-workshop
 ```
 
 ```
-cd react-is-awesome
+cd react-workshop
 ```
 
 ```
@@ -55,7 +55,7 @@ In the editor, add a button in `App.js` by replacing `<p>` element with the foll
 
 In the editor, import `styled-component`
 ```
-import Styled from 'styled-components';
+import styled from 'styled-components';
 ```
 
 Define a button style
@@ -124,9 +124,8 @@ const Button = styled.button`
 #### Try it out
 
 * Play around with the styles and make the button special to you - May be hot pink? round? 😆
-* Add a div called `ButtonContainer` using styled-components to leave some padding inside the `Button`
 
-Time: 10mins
+Time: 5mins
 
 <kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/button.png" /></kbd>
 
@@ -146,7 +145,7 @@ export default class extends Component {
 }
 ```
 
-Firstly, create a new file called `Button.js` under a new folder named `components`
+Firstly, create a new file called `Button.js` under a new folder named `components` under `src`
 
 Put the skeleton component snippet to the `Button.js`
 
@@ -521,11 +520,93 @@ Trigger those 3 actions in the buttons' `onClick` event accordingly
   }
 ```
 
+**Bind `Onboarding` component to a target element**
 
+Firstly, let's create a dummy component that the `onBoarding` element can bind to.
 
+`App.js`
+```
+const ColorPanel = styled.div`
+  display: inline-block;
+  background-color: #CDCDCD;
+  color: black;
+  padding: 2rem;
+  width: fit-content;
+  margin: 1rem;
+  border-left: 1rem solid ${props => props.color};
+`
+```
 
+I also create a flex center container to put those new elements
+```
+const FlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+```
 
+```
+        <FlexContainer>
+          <ColorPanel color='green'>Element 1</ColorPanel>
+          <ColorPanel color='red'>Element 2</ColorPanel>
+          <ColorPanel color='yellow'>Element 3</ColorPanel>
+        </FlexContainer>
+```
 
+I will need some ways to connect `Onboarding` component to the target `ColorPanel` element
+
+I am going to create a new component called `WithOnboarding` to connect those two together
+
+`WithOnboarding.js`
+```
+import React, { Component } from 'react';
+import Onboarding from './Onboarding';
+
+export default class extends Component {
+  render() {
+    const { current, children, onboarding } = this.props;
+
+    return (
+      <div>
+        {children}
+        {current === onboarding && <Onboarding
+          title={onboarding.title}
+          content={onboarding.content}
+          footer={onboarding.footer}
+        />}
+      </div>
+    )
+  }
+}
+```
+
+So in `App.js`, we can just do
+```
+  render() {
+    const { currentOnboarding } = this.state;
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <FlexContainer>
+          <WithOnboarding onboarding={this.initialOnboarding} current={currentOnboarding}>
+            <ColorPanel color='green'>Element 1</ColorPanel>
+          </WithOnboarding>
+          <WithOnboarding onboarding={this.initialOnboarding.next} current={currentOnboarding}>
+            <ColorPanel color='red'>Element 2</ColorPanel>
+          </WithOnboarding>
+          <WithOnboarding onboarding={this.initialOnboarding.next.next} current={currentOnboarding}>
+            <ColorPanel color='yellow'>Element 3</ColorPanel>
+          </WithOnboarding>
+        </FlexContainer>
+        <Button onClick={this.startOnboarding}>Start</Button>
+      </div>
+    );
+  }
+```
 
 
 

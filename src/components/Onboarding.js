@@ -7,6 +7,7 @@ const Container = styled.div`
   padding: 1rem;
   width: 400px;
   text-align: left;
+  position: absolute;
 `;
 
 export default class extends Component {

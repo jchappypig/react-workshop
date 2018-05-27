@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import Button from './components/Button';
-import Onboarding from './components/Onboarding';
+import WithOnboarding from './components/WithOnboarding';
 import logo from './logo.svg';
 import './App.css';
 import styled from 'styled-components';
 
+const ColorPanel = styled.div`
+  display: inline-block;
+  background-color: #CDCDCD;
+  color: black;
+  padding: 2rem;
+  width: fit-content;
+  margin: 1rem;
+  border-left: 1rem solid ${props => props.color};
+`
+
+const FlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 class App extends Component {
   constructor(props) {
@@ -57,12 +72,18 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Button onClick={this.startOnboarding}>Save</Button>
-        {currentOnboarding && <Onboarding
-          title={currentOnboarding.title}
-          content={currentOnboarding.content}
-          footer={currentOnboarding.footer}
-        />}
+        <FlexContainer>
+          <WithOnboarding onboarding={this.initialOnboarding} current={currentOnboarding}>
+            <ColorPanel color='green'>Element 1</ColorPanel>
+          </WithOnboarding>
+          <WithOnboarding onboarding={this.initialOnboarding.next} current={currentOnboarding}>
+            <ColorPanel color='red'>Element 2</ColorPanel>
+          </WithOnboarding>
+          <WithOnboarding onboarding={this.initialOnboarding.next.next} current={currentOnboarding}>
+            <ColorPanel color='yellow'>Element 3</ColorPanel>
+          </WithOnboarding>
+        </FlexContainer>
+        <Button onClick={this.startOnboarding}>Start</Button>
       </div>
     );
   }
