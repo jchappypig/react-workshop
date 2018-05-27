@@ -184,6 +184,7 @@ export default class extends Component {
 }
 ```
 
+(30 minutes)
 
 
 **Learn about version control - [git](http://rogerdudler.github.io/git-guide/)**
@@ -339,7 +340,7 @@ export default class extends Component {
 
 `App.js`
 ```
-const onboarding1 = {
+const onboarding = {
   title: 'Start',
   content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.'
   footer: <Button>Learn more</Button>
@@ -355,9 +356,9 @@ class App extends Component {
         </header>
         <Button>Save</Button>
         <Onboarding
-          title={onboarding1.title}
-          content={onboarding1.content}
-          footer={onboarding1.footer}
+          title={onboarding.title}
+          content={onboarding.content}
+          footer={onboarding.footer}
           />
       </div>
     );
@@ -377,11 +378,11 @@ class App extends Component {
     super(props);
     const onboarding1 = {
       title: 'Start',
-      content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.'
+      content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.',
       footer: <Button>Learn more</Button>
     }
 
-    this.initialOnboarding = onBoarding1;
+    this.initialOnboarding = onboarding1;
   }
   render() {
     return (
@@ -520,6 +521,31 @@ Trigger those 3 actions in the buttons' `onClick` event accordingly
   }
 ```
 
+Every time we click we change the state, and set the `currentOnboarding`. So we are going to read the `currentOnboarding` from the state and re-render every time on click.
+
+`App.js`
+```
+render() {
+    const {currentOnboarding} = this.state;
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <Button onClick={this.startOnboarding}>Start</Button>
+        {currentOnboarding && <Onboarding
+          title={currentOnboarding.title}
+          content={currentOnboarding.content}
+          footer={currentOnboarding.footer}
+          />}
+      </div>
+    );
+  }
+```
+
+30 minutes
+
 **Bind `Onboarding` component to a target element**
 
 Firstly, let's create a dummy component that the `onBoarding` element can bind to.
@@ -607,6 +633,15 @@ So in `App.js`, we can just do
     );
   }
 ```
+20 minutes
+
+## Useful resources
+https://storybook.js.org/
+https://react-styleguidist.js.org/
+https://atlaskit.atlassian.com/packages
+https://ant.design/docs/react/introduce
+
+
 
 
 
