@@ -124,7 +124,7 @@ const Button = styled.button`
 #### Try it out
 
 * Play around with the styles and make the button special to you - May be hot pink? round? 😆
-* Add a div called `Container` using styled-components to leave some padding before the `Button`
+* Add a div called `ButtonContainer` using styled-components to leave some padding inside the `Button`
 
 Time: 10mins
 
@@ -298,7 +298,7 @@ const Container = styled.div`
 **Test the `Onboarding` Component in `App.js`**
 
 ```
-const startOnboarding = {
+const onboarding1 = {
   title: 'Start',
   content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.'
 }
@@ -306,14 +306,240 @@ const startOnboarding = {
 ```
 ```
 
-          <Onboarding title={startOnboarding.title} content={startOnboarding.content}/>
+          <Onboarding title={onboarding1.title} content={onboarding1.content}/>
 ```
 
-**Challenge: Try to add button to the footer**
+### Challenge: Try to add a button to as the footer of `Onboarding` component**
 
 Time: 10 mins
 
 <kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/OnboardingHover.gif" /></kbd>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+**Solution**
+
+`Onboarding.js`
+```
+export default class extends Component {
+  render() {
+    const { title, content, footer } = this.props;
+
+    return (
+      <Container>
+        <h4>{title}</h4>
+        <p>
+          {content}
+        </p>
+        {footer}
+      </Container>
+    )
+  }
+}
+```
+
+`App.js`
+```
+const onboarding1 = {
+  title: 'Start',
+  content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.'
+  footer: <Button>Learn more</Button>
+}
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <Button>Save</Button>
+        <Onboarding
+          title={onboarding1.title}
+          content={onboarding1.content}
+          footer={onboarding1.footer}
+          />
+      </div>
+    );
+  }
+}
+
+```
+
+### Make `Onboarding` Component interactive
+
+**Try `onClick` event**
+
+Move onBoarding steps definition into `App` Constructor
+```
+class App extends Component {
+  constructor(props) {
+    super(props);
+    const onboarding1 = {
+      title: 'Start',
+      content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.'
+      footer: <Button>Learn more</Button>
+    }
+
+    this.initialOnboarding = onBoarding1;
+  }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <Button>Save</Button>
+        <Onboarding
+          title={this.initialOnboarding.title}
+          content={this.initialOnboarding.content}
+          footer={this.initialOnboarding.footer}
+          />
+      </div>
+    );
+  }
+}
+
+```
+
+Define a dummy onClick event in `App.js`
+```
+  onClick = () => {
+    window.alert('Stop clicking me!');
+  }
+
+```
+
+Pass `onClick` property to `Button` component
+
+`App.js`
+```
+<Button onClick={this.onClick}>Got it</Button>
+```
+
+Allow `onClick` to be called in `Button` Component
+
+`Button.js`
+```
+export default class extends Component {
+  render() {
+    return <ButtonContainer><Button onClick={this.props.onClick}>{this.props.children}</Button></ButtonContainer>
+  }
+}
+```
+<kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/onBoardingClick.gif" /></kbd>
+
+
+<br><br>
+
+**Introducing component state**
+
+Firstly, let's create multiple onboarding steps
+
+```
+  constructor(props) {
+    super(props);
+
+    const onBoarding1 = {
+      title: 'Start',
+      content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.',
+      footer: <Button>Learn more</Button>
+    }
+
+    const onBoarding2 = {
+      title: 'Learn more',
+      content: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here", making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for "lorem ipsum" will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).',
+      footer: <div><Button>Previous</Button><Button>Next</Button></div>
+    }
+
+    const onBoarding3 = {
+      title: 'Finally',
+      content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.',
+      footer: <Button>Got it</Button>
+    }
+
+    onBoarding1.next = onBoarding2;
+    onBoarding2.next = onBoarding3;
+    onBoarding3.previous = onBoarding2;
+    onBoarding2.previous = onBoarding1;
+
+    this.state = { currentOnboarding: undefined };
+    this.initialOnboarding = onBoarding1;
+  }
+```
+
+Define 3 major actions - `startOnboarding`, `nextOnboarding` and `previousOnboarding`
+
+```
+  startOnboarding = () => {
+    this.setState({ currentOnboarding: this.initialOnboarding })
+  }
+
+  nextOnboarding = (onboarding) => {
+    this.setState({ currentOnboarding: onboarding.next });
+  }
+
+  previousOnboarding = (onboarding) => {
+    this.setState({ currentOnboarding: onboarding.previous });
+  }
+
+```
+
+Trigger those 3 actions in the buttons' `onClick` event accordingly
+
+```
+  constructor(props) {
+    super(props);
+
+    const onBoarding1 = {
+      title: 'Start',
+      content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.',
+      footer: <Button onClick={() => this.nextOnboarding(onBoarding1)}>Learn more</Button>
+    }
+
+    const onBoarding2 = {
+      title: 'Learn more',
+      content: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here", making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for "lorem ipsum" will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).',
+      footer: <div><Button onClick={() => this.previousOnboarding(onBoarding2)}>Previous</Button><Button onClick={() => this.nextOnboarding(onBoarding2)}>Next</Button></div>
+    }
+
+    const onBoarding3 = {
+      title: 'Finally',
+      content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.',
+      footer: <Button onClick={() => this.nextOnboarding(onBoarding3)}>Got it</Button>
+    }
+
+    onBoarding1.next = onBoarding2;
+    onBoarding2.next = onBoarding3;
+    onBoarding3.previous = onBoarding2;
+    onBoarding2.previous = onBoarding1;
+
+    this.state = { currentOnboarding: undefined };
+    this.initialOnboarding = onBoarding1;
+  }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

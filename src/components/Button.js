@@ -26,8 +26,14 @@ const Button = styled.button`
     }
 `;
 
+const ButtonContainer = styled.div`
+    display: inline-block;
+    padding: 1rem;
+`
+
+
 export default class extends Component {
   render() {
-    return <Button>{this.props.children}</Button>
+    return <ButtonContainer><Button onClick={this.props.onClick}>{this.props.children}</Button></ButtonContainer>
   }
 }
