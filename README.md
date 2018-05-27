@@ -138,6 +138,43 @@ export default class extends Component {
 
 Firstly, create a new file called `Button.js` under a new folder named `components`
 
+Put the skeleton component snippet to the `Button.js`
+
+Then move button related code into `Button.js`. It becomes
+
+```
+const buttonColor = '#2BB98C';
+const buttonHoverColor = '#21906d'
+
+const Button = styled.button`
+    color: #fff;
+    background-color: ${buttonColor};
+    border-color: ${buttonColor};
+    display: inline-block;
+    font-weight: normal;
+    font-size: 1rem;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    padding: 0.75rem 1.75rem;
+    border: 1px solid transparent;
+    border-radius: 0.3rem;
+
+    &:hover {
+      background-color: ${buttonHoverColor};
+      border-color: ${buttonHoverColor};
+    }
+`;
+
+export default class extends Component {
+  render() {
+    return <Button>{this.props.children}</Button>
+  }
+}
+```
+
 
 
 **Learn about version control - [git](http://rogerdudler.github.io/git-guide/)**
@@ -167,7 +204,7 @@ Add your react app to github - [https://help.github.com/articles/adding-an-exist
 
 * Create a new github repository
 
-![Create a new github repository](https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/new-repo.png)
+<kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/new-repo.png" /></kbd>
 
 * Back to the terminal
 ```
