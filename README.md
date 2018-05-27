@@ -8,7 +8,9 @@
   * The react mindset
 * Create a button React component
 * Create an on-boarding React component
+[https://atlaskit.atlassian.com/packages/core/onboarding](https://atlaskit.atlassian.com/packages/core/onboarding)
 * Storybook
+[https://storybook.js.org/](https://storybook.js.org/)
 * Deploy React app to Heroku
 
 <br><br>
@@ -45,7 +47,7 @@ yarn add styled-components
 
 **Add button in the page**
 
-In the editor, add a button in `App.js` under `<p>` tag
+In the editor, add a button in `App.js` by replacing `<p>` element with the following
 ```
 <button>Save</button>
 ```
@@ -119,9 +121,17 @@ const Button = styled.button`
 `;
 ```
 
-#### Try it out: Play around with the styles and make the button special to you - May be hot pink? round? 😆
+#### Try it out
 
-5mins
+* Play around with the styles and make the button special to you - May be hot pink? round? 😆
+* Add a div called `Container` using styled-components to leave some padding before the `Button`
+
+Time: 10mins
+
+<kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/button.png" /></kbd>
+
+
+
 <br><br><br><br>
 
 **Extract Button component**
@@ -211,6 +221,107 @@ Add your react app to github - [https://help.github.com/articles/adding-an-exist
 git remote add origin git@github.com:<yourGithubUserName>/react-workshop.git
 git push -u origin master
 ```
+
+### Create another React component - onboarding
+Reference:
+https://atlaskit.atlassian.com/packages/core/onboarding
+
+**Create a new file called `Onboarding.js` under `components` folder**
+
+With the skeleton of a component
+```
+import React, { Component } from 'react';
+
+export default class extends Component {
+  render() {
+  }
+}
+```
+
+By looking at the expecting onboarding design, we know that each onboarding component is composed of 3 parts - title, content and footer
+
+**Firstly, let's create onboarding title in `Onboarding` component**
+
+```
+  render() {
+    const { title } = this.props;
+
+    return (
+      <div>
+        <h4>{title}</h4>
+      </div>
+    )
+  }
+```
+
+**Give some styles to the background in `Onboarding` component**
+
+```
+const Container = styled.div`
+  color: white;
+  background-color: #2BB98C;
+  padding: 1rem;
+  width: 400px;
+  text-align: left;
+`;
+```
+
+```
+ render() {
+    const { title } = this.props;
+
+    return (
+      <Container>
+        <h4>{title}</h4>
+      </Container>
+    )
+  }
+```
+
+**Add onboarding content in `Onboarding` component**
+
+```
+ render() {
+    const { title, content } = this.props;
+
+    return (
+      <Container>
+        <h4>{title}</h4>
+        <p>
+          {content}
+        </p>
+      </Container>
+    )
+  }
+```
+
+**Test the `Onboarding` Component in `App.js`**
+
+```
+const startOnboarding = {
+  title: 'Start',
+  content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.'
+}
+
+```
+```
+
+          <Onboarding title={startOnboarding.title} content={startOnboarding.content}/>
+```
+
+**Challenge: Try to add button to the footer**
+
+Time: 10 mins
+
+<kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/onboardingHover.gif" /></kbd>
+
+
+
+
+
+
+
+
 
 
 

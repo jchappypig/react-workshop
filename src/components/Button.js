@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const buttonColor = '#2BB98C';
-const buttonHoverColor = '#21906d'
+const buttonColor = '#21906d';
+const buttonHoverColor = '#2BB98C';
 
 const Button = styled.button`
     color: #fff;
@@ -22,7 +22,7 @@ const Button = styled.button`
 
     &:hover {
       background-color: ${buttonHoverColor};
-      border-color: ${buttonHoverColor};
+      border-color: white;
     }
 `;
 
