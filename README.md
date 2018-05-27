@@ -313,7 +313,7 @@ const startOnboarding = {
 
 Time: 10 mins
 
-<kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/onboardingHover.gif" /></kbd>
+<kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/OnboardingHover.gif" /></kbd>
 
 
 
