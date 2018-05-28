@@ -15,6 +15,51 @@
 
 <br><br>
 
+## Before we start
+
+* Register a github account
+https://github.com/
+
+* Add your ssh key to your github account
+https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+
+
+* Register a heroku account
+https://www.heroku.com/
+
+* Add your ssh key to your heroku account
+https://devcenter.heroku.com/articles/keys
+```
+heroku keys:add
+```
+
+* Make sure the following is installed through terminal
+
+  * homebrew
+  * git
+  * heroku
+  * npm
+  * yarn
+  * npx
+
+````
+command -v brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+command -v git >/dev/null 2>&1 || brew install git
+command -v heroku >/dev/null 2>&1 || brew install heroku
+command -v npm >/dev/null 2>&1 || brew install npm
+command -v yarn >/dev/null 2>&1 || npm install -g yarn
+command -v npx >/dev/null 2>&1 || npm install -g npx
+
+````
+
+* Install VS code
+https://code.visualstudio.com/download
+
+
+
+
+
 ## Step-by-step tutorial
 ### Create a react app using [react-create-app](https://github.com/facebook/create-react-app)
 
