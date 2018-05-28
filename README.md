@@ -166,12 +166,6 @@ const Button = styled.button`
 `;
 ```
 
-#### Try it out
-
-* Play around with the styles and make the button special to you - May be hot pink? round? 😆
-
-Time: 5mins
-
 <kbd><img src="https://github.com/SafetyCulture/react-workshop-fundamental/raw/master/src/assets/button.png" /></kbd>
 
 
@@ -230,6 +224,12 @@ export default class extends Component {
 ```
 
 (30 minutes)
+
+#### Try it out
+
+* Play around with the styles and make the button special to you - May be hot pink? round? 😆
+
+Time: 5mins
 
 
 **Learn about version control - [git](http://rogerdudler.github.io/git-guide/)**
@@ -680,11 +680,59 @@ So in `App.js`, we can just do
 ```
 20 minutes
 
+### Deployment
+
+```
+heroku create -b https://github.com/mars/create-react-app-buildpack.git
+```
+
+```
+yarn build
+```
+
+```
+git push heroku master
+```
+
+[https://blog.heroku.com/deploying-react-with-zero-configuration](https://blog.heroku.com/deploying-react-with-zero-configuration)
+[https://devcenter.heroku.com/articles/buildpacks](https://devcenter.heroku.com/articles/buildpacks)
+
+### Storybook
+
+**Install storybook**
+```
+npm i -g @storybook/cli
+getstorybook
+```
+
+**Start storybook**
+```
+yarn run storybook
+```
+
+**Edit the storybook**
+
+In `src/stories/index.js`, we replace the `Button` with our own `Button`
+```
+import { Welcome } from '@storybook/react/demo';
+import Button from '../components/Button'
+```
+
+We can also add another storybook for `Onboarding` component
+```
+storiesOf('Onboarding', module)
+.add('with title and content', () => (
+  <Onboarding title='Hello title' content='Hello content' footer={<Button onClick={action('clicked')}>Got it</Button>}>
+  </Onboarding>
+));
+```
+
 ## Useful resources
-https://storybook.js.org/
-https://react-styleguidist.js.org/
-https://atlaskit.atlassian.com/packages
-https://ant.design/docs/react/introduce
+* https://storybook.js.org/
+* https://react-styleguidist.js.org/
+* https://atlaskit.atlassian.com/packages
+* https://ant.design/docs/react/introduce
+* https://interplayapp.com/
 
 
 
