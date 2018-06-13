@@ -28,19 +28,19 @@ class App extends Component {
     const onBoarding1 = {
       title: 'Start',
       content: 'Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis.',
-      footer: <Button onClick={() => this.nextOnboarding(onBoarding1)}>Learn more</Button>
+      footer: <Button onClick={() => this.nextOnboarding()}>Learn more</Button>
     }
 
     const onBoarding2 = {
       title: 'Learn more',
       content: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using "Content here, content here", making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for "lorem ipsum" will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).',
-      footer: <div><Button onClick={() => this.previousOnboarding(onBoarding2)}>Previous</Button><Button onClick={() => this.nextOnboarding(onBoarding2)}>Next</Button></div>
+      footer: <div><Button onClick={() => this.previousOnboarding()}>Previous</Button><Button onClick={() => this.nextOnboarding()}>Next</Button></div>
     }
 
     const onBoarding3 = {
       title: 'Finally',
       content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.',
-      footer: <Button onClick={() => this.nextOnboarding(onBoarding3)}>Got it</Button>
+      footer: <Button onClick={() => this.nextOnboarding()}>Got it</Button>
     }
 
     onBoarding1.next = onBoarding2;
@@ -56,12 +56,12 @@ class App extends Component {
     this.setState({ currentOnboarding: this.initialOnboarding })
   }
 
-  nextOnboarding = (onboarding) => {
-    this.setState({ currentOnboarding: onboarding.next });
+  nextOnboarding = () => {
+    this.setState({ currentOnboarding: this.state.currentOnboarding.next });
   }
 
-  previousOnboarding = (onboarding) => {
-    this.setState({ currentOnboarding: onboarding.previous });
+  previousOnboarding = () => {
+    this.setState({ currentOnboarding: this.state.currentOnboarding.previous });
   }
 
   render() {

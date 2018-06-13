@@ -9,8 +9,6 @@
 * Create a button React component
 * Create an on-boarding React component
 [https://atlaskit.atlassian.com/packages/core/onboarding](https://atlaskit.atlassian.com/packages/core/onboarding)
-* Storybook
-[https://storybook.js.org/](https://storybook.js.org/)
 * Deploy React app to Heroku
 
 <br><br>
@@ -522,12 +520,12 @@ Define 3 major actions - `startOnboarding`, `nextOnboarding` and `previousOnboar
     this.setState({ currentOnboarding: this.initialOnboarding })
   }
 
-  nextOnboarding = (onboarding) => {
-    this.setState({ currentOnboarding: onboarding.next });
+  nextOnboarding = () => {
+    this.setState({ currentOnboarding: this.state.currentOnboarding.next });
   }
 
-  previousOnboarding = (onboarding) => {
-    this.setState({ currentOnboarding: onboarding.previous });
+  previousOnboarding = () => {
+    this.setState({ currentOnboarding: this.state.currentOnboarding.previous });
   }
 
 ```
@@ -683,7 +681,7 @@ So in `App.js`, we can just do
 ### Deployment
 
 ```
-heroku create -b https://github.com/mars/create-react-app-buildpack.git
+heroku create <appName> -b https://github.com/mars/create-react-app-buildpack.git
 ```
 
 ```
@@ -697,35 +695,6 @@ git push heroku master
 [https://blog.heroku.com/deploying-react-with-zero-configuration](https://blog.heroku.com/deploying-react-with-zero-configuration)
 [https://devcenter.heroku.com/articles/buildpacks](https://devcenter.heroku.com/articles/buildpacks)
 
-### Storybook
-
-**Install storybook**
-```
-npm i -g @storybook/cli
-getstorybook
-```
-
-**Start storybook**
-```
-yarn run storybook
-```
-
-**Edit the storybook**
-
-In `src/stories/index.js`, we replace the `Button` with our own `Button`
-```
-import { Welcome } from '@storybook/react/demo';
-import Button from '../components/Button'
-```
-
-We can also add another storybook for `Onboarding` component
-```
-storiesOf('Onboarding', module)
-.add('with title and content', () => (
-  <Onboarding title='Hello title' content='Hello content' footer={<Button onClick={action('clicked')}>Got it</Button>}>
-  </Onboarding>
-));
-```
 
 ## Useful resources
 * https://storybook.js.org/
